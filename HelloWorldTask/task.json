@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
-  "id": "12345678-1234-1234-1234-123456789012",
+  "id": "4c14a818-4bad-4620-a648-220d2535f2df",
   "name": "HelloWorldTask",
   "friendlyName": "Hello World Task",
   "description": "A simple hello world task for Azure Pipelines",
@@ -32,7 +32,7 @@
     }
   ],
   "execution": {
-    "Node10": {
+    "Node16": {
       "target": "index.js"
     }
   }
