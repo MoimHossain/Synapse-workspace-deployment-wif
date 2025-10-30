@@ -1,0 +1,39 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+  "id": "12345678-1234-1234-1234-123456789012",
+  "name": "HelloWorldTask",
+  "friendlyName": "Hello World Task",
+  "description": "A simple hello world task for Azure Pipelines",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "author": "MoimHossain",
+  "version": {
+    "Major": 0,
+    "Minor": 0,
+    "Patch": 1
+  },
+  "instanceNameFormat": "Hello World Task",
+  "inputs": [
+    {
+      "name": "greeting",
+      "type": "string",
+      "label": "Greeting",
+      "defaultValue": "Hello",
+      "required": true,
+      "helpMarkDown": "The greeting to display"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "label": "Name",
+      "defaultValue": "World",
+      "required": true,
+      "helpMarkDown": "The name to greet"
+    }
+  ],
+  "execution": {
+    "Node10": {
+      "target": "index.js"
+    }
+  }
+}

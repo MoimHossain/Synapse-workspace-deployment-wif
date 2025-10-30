@@ -1,0 +1,36 @@
+{
+  "manifestVersion": 1,
+  "id": "synapse-workspace-deployment-wif",
+  "name": "Synapse Workspace Deployment with WIF",
+  "version": "0.0.1",
+  "publisher": "MoimHossain",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "description": "Azure Pipeline task for deploying Synapse Workspace using Workload Identity Federation",
+  "categories": [
+    "Azure Pipelines"
+  ],
+  "icons": {
+    "default": "images/extension-icon.png"
+  },
+  "files": [
+    {
+      "path": "HelloWorldTask"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "hello-world-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "HelloWorldTask"
+      }
+    }
+  ]
+}
