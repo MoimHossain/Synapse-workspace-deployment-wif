@@ -195,7 +195,7 @@ export class ArtifactClient {
     private async deployIntegrationruntime(baseUrl: string, payload: Resource, token: string): Promise<string> {
         try {
             // Use token with audience `management.azure.com`
-            token = await this.params.tokenCredentials.getToken();
+            token = await this.getManagementAccessToken();
             return await this.artifactDeploymentTask(baseUrl,
                 `${Artifact.integrationruntime.toString()}s`, payload, token);
         } catch (err) {
@@ -595,10 +595,26 @@ export class ArtifactClient {
     private getBaseurl(workspace: string, environment: string, resourceType: string) {
         switch (resourceType) {
             case Artifact.integrationruntime:
-                return `${this.params.tokenCredentials.baseUrl}`;
+                return `${this.params.baseUrl}`;
             default:
                 return ArtifactClient.getUrlByEnvironment(workspace, environment);
         }
+    }
+
+    private async getManagementAccessToken(): Promise<string> {
+        const scheme = this.params.authScheme.toLowerCase();
+        if (scheme === 'workloadidentityfederation') {
+            if (!this.params.tokenProvider) {
+                throw new Error('Token provider was not initialized for workload identity federation.');
+            }
+            return this.params.tokenProvider.getToken(this.params.baseUrl);
+        }
+
+        if (!this.params.tokenCredentials) {
+            throw new Error('Application token credentials are not available for management token acquisition.');
+        }
+
+        return this.params.tokenCredentials.getToken();
     }
 
     public static getUrlByEnvironment(workspace: string, environment: string): string {
