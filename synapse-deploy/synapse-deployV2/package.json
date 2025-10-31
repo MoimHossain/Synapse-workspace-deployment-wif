@@ -4,10 +4,10 @@
   "description": "Deploy plugin for synapse workspace",
   "main": "index.js",
   "scripts": {
-  "test": "nyc mocha",
-  "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
-  "ci": "npx --yes rimraf node_modules && npm install --production",
-  "cb": "npx --yes rimraf dist && tsc",
+    "test": "nyc mocha",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
+    "ci": "npx --yes rimraf node_modules && npm install --production",
+    "cb": "npx --yes rimraf dist && tsc",
     "clean-js": "pwsh -NoProfile -ExecutionPolicy Bypass -Command \"Get-ChildItem -Path . -Include *.js, *.js.map -Recurse -File | Where-Object { $_.FullName -notlike '*node_modules*' } | Remove-Item -Force\"",
     "pubprep": "npm run ci && npm run cb"
   },
@@ -17,8 +17,11 @@
     "@types/node": "^14.10.1",
     "@types/q": "^1.5.4",
     "adm-zip": "^0.4.16",
-    "azure-pipelines-task-lib": "3.1.6",
+    "azure-pipelines-task-lib": "^4.17.2",
+    "azure-pipelines-tasks-azure-arm-rest": "3.263.1",
     "azure-pipelines-tasks-azure-arm-rest-v2": "2.0.4",
+    "azure-pipelines-tasks-artifacts-common": "^2.262.0",
+    "azure-devops-node-api": "^14.0.2",
     "typed-rest-client": "^1.8.4",
     "uuid": "8.3.0",
     "@types/chai": "^4.2.14",
@@ -28,6 +31,7 @@
     "@types/uuid": "^8.3.0",
     "chai": "^4.2.0",
     "mockery": "^2.1.0",
+  "moment": "^2.29.4",
     "chai-as-promised": "^7.1.1",
     "node-stream-zip": "^1.11.3",
     "nyc": "^15.1.0",
@@ -37,6 +41,5 @@
     "@azure/ms-rest-nodeauth": "^3.0.10",
     "rimraf": "^5.0.5"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

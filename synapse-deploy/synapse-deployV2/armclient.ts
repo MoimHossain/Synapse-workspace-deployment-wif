@@ -63,10 +63,10 @@ async function delay(ms: number) {
 
 export async function deploy(armTemplate: string, armTemplateParameter: string): Promise<string> {
     try {
-        var params = await deployUtils.getParams();
-        var url: string = await getDeploymentUrl(params.tokenCredentials.baseUrl, params.resourceGroup, params.subscriptionId);
+    var params = await deployUtils.getParams();
+    var url: string = await getDeploymentUrl(params.baseUrl, params.resourceGroup, params.subscriptionId);
         console.log('Arm resources deployment url: ', url);
-        var token = await params.tokenCredentials.getToken();
+    var token = await getArmAccessToken(params);
         var parameters: any;
         if (!!armTemplateParameter) {
             var armTemplateParameterObj = JSON.parse(armTemplateParameter);
@@ -135,9 +135,9 @@ export async function deploy(armTemplate: string, armTemplateParameter: string):
 
 export async function getWorkspaceLocation(workspace: string): Promise<string> {
     var params = await deployUtils.getParams();
-    var url: string = await getWorkspaceInfoUrl(params.tokenCredentials.baseUrl, params.resourceGroup, params.subscriptionId, workspace);
+    var url: string = await getWorkspaceInfoUrl(params.baseUrl, params.resourceGroup, params.subscriptionId, workspace);
     console.log('Workspace info url: ', url);
-    var token = await params.tokenCredentials.getToken();
+    var token = await getArmAccessToken(params);
     var headers: httpInterfaces.IHeaders = {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json; charset=utf-8'
@@ -169,4 +169,20 @@ export async function getWorkspaceLocation(workspace: string): Promise<string> {
             return reject(deployUtils.DeployStatus.failed);
         });
     });
+}
+
+async function getArmAccessToken(params: deployUtils.Params): Promise<string> {
+    const scheme = params.authScheme.toLowerCase();
+    if (scheme === 'workloadidentityfederation') {
+        if (!params.tokenProvider) {
+            throw new Error('Token provider was not initialized for workload identity federation.');
+        }
+        return params.tokenProvider.getToken(params.baseUrl);
+    }
+
+    if (!params.tokenCredentials) {
+        throw new Error('Application token credentials are not available for the current authentication scheme.');
+    }
+
+    return params.tokenCredentials.getToken();
 }
