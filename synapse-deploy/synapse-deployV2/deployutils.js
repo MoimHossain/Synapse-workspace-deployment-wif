@@ -180,7 +180,7 @@ function gatherFederationSignals(connectedService) {
     const hasCertificate = coerceBooleanParameter(parameters['servicePrincipalCertificate']);
     const oidcIssuer = parameters['oidcIssuer'] || parameters['oidcissuer'] || '';
     const oidcAudience = parameters['oidcAudience'] || parameters['oidcaudience'] || '';
-    const workloadFlag = (task.getEndpointDataParameter(connectedService, 'WorkloadIdentityFederation', false) || '').toString();
+    const workloadFlag = (tryGetEndpointDataParameter(connectedService, 'WorkloadIdentityFederation') || '').toString();
     task.debug(`${connectedService} raw auth scheme = ${scheme}, authType = ${authType}, hasSecret = ${hasSecret}, hasCertificate = ${hasCertificate}, hasOidcIssuer = ${!!oidcIssuer}, hasOidcAudience = ${!!oidcAudience}, workloadFlag = ${workloadFlag}`);
     return {
         scheme,
@@ -206,7 +206,7 @@ function detectWorkloadIdentityFederation(connectedService, input) {
     const oidcIssuer = parameters['oidcIssuer'] || parameters['oidcissuer'] || input.oidcIssuer;
     const oidcAudience = parameters['oidcAudience'] || parameters['oidcaudience'] || input.oidcAudience;
     const federatedTokenEndpoint = parameters['federatedTokenEndpoint'] || parameters['federatedtokenendpoint'];
-    const workloadFlag = (task.getEndpointDataParameter(connectedService, 'WorkloadIdentityFederation', false) || input.workloadFlag || '').toLowerCase();
+    const workloadFlag = (tryGetEndpointDataParameter(connectedService, 'WorkloadIdentityFederation') || input.workloadFlag || '').toLowerCase();
     const signals = [];
     if (lowerScheme === 'workloadidentityfederation') {
         signals.push('scheme');
@@ -246,6 +246,15 @@ function tryGetEndpointAuthorization(connectedService) {
     }
     catch (err) {
         task.debug(`${connectedService} getEndpointAuthorization threw: ${err}`);
+        return undefined;
+    }
+}
+function tryGetEndpointDataParameter(connectedService, parameterName) {
+    try {
+        return task.getEndpointDataParameter(connectedService, parameterName, true);
+    }
+    catch (err) {
+        task.debug(`${connectedService} getEndpointDataParameter(${parameterName}) threw: ${err}`);
         return undefined;
     }
 }
