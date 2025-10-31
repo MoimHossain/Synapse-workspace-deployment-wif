@@ -11,6 +11,24 @@
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
+  "branding": {
+    "color": "#FFFFFF",
+    "theme": "light"
+  },
+  "content": {
+    "details": {
+      "path": "overview.md"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/MoimHossain/Synapse-workspace-deployment-wif"
+  },
+  "screenshots": [
+    {
+      "path": "images/icon.png"
+    }
+  ],
   "scopes": [
     "vso.variablegroups_read",
     "vso.code",
