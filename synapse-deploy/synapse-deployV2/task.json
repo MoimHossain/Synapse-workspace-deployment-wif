@@ -3,7 +3,7 @@
   "name": "synapse-workspace-deployment-wif",
   "friendlyName": "Synapse workspace deployment WIF",
   "description": "Deployment task for synapse workspace WIF",
-  "helpMarkDown": "Displays the name of your extension WIF",
+  "helpMarkDown": "Deploys Synapse workspace using Workload Identity Federation.",
   "category": "Utility",
   "preview": false,
   "visibility": [
@@ -13,7 +13,7 @@
   "author": "MoimHossain",
   "version": {
     "Major": 1,
-    "Minor": 0,
+    "Minor": 1,
     "Patch": 0
   },
   "groups": [
