@@ -3,7 +3,7 @@
   "id": "mh-synapse-workspace-deployment",
   "name": "Synapse Workspace Deployment with WIF",
   "description": "Azure Pipeline task for deploying Synapse Workspace using Workload Identity Federation",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "publisher": "MoimHossain",
   "targets": [
     {

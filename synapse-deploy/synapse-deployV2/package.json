@@ -4,13 +4,14 @@
   "description": "Deploy plugin for synapse workspace",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha",
-    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "ci": "rimraf .\\node_modules && npm install --production",
-    "cb": "rimraf .\\dist && tsc",
+  "test": "nyc mocha",
+  "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
+  "ci": "npx --yes rimraf node_modules && npm install --production",
+  "cb": "npx --yes rimraf dist && tsc",
+    "clean-js": "pwsh -NoProfile -ExecutionPolicy Bypass -Command \"Get-ChildItem -Path . -Include *.js, *.js.map -Recurse -File | Where-Object { $_.FullName -notlike '*node_modules*' } | Remove-Item -Force\"",
     "pubprep": "npm run ci && npm run cb"
   },
-  "author": "PraveenMathamsetty",
+  "author": "MoimHossain",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^14.10.1",
@@ -33,7 +34,8 @@
     "sync-request": "^6.1.0",
     "ts-mockito": "^2.6.1",
     "@types/js-yaml": "^4.0.0",
-    "@azure/ms-rest-nodeauth": "^3.0.10"
+    "@azure/ms-rest-nodeauth": "^3.0.10",
+    "rimraf": "^5.0.5"
   },
   "devDependencies": {
   }
