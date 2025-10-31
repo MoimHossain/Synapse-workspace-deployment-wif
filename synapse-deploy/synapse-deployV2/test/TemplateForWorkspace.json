@@ -1,0 +1,49 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"type": "string",
+			"metadata": "Workspace name",
+			"defaultValue": "xltestscus"
+		},
+		"xltestscus-WorkspaceDefaultSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'xltestscus-WorkspaceDefaultSqlServer'"
+		},
+		"xl_adf_akv_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://xl-adf-akv.vault.azure.net/"
+		},
+		"xltestscus-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://xltestdlg2.dfs.core.windows.net"
+		},
+		"SQL script 1_properties_content_currentConnection_name": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SQL script 1_properties_content_currentConnection_type": {
+			"type": "string",
+			"defaultValue": "SqlOnDemand"
+		}
+	},
+	"variables": {
+		"workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('workspaceName'), '/xl_adf_akv')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('xl_adf_akv_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

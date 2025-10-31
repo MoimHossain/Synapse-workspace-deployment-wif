@@ -1,0 +1,40 @@
+{
+  "name": "buildanddeploytask",
+  "version": "1.0.0",
+  "description": "Deploy plugin for synapse workspace",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc mocha",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
+    "ci": "rimraf .\\node_modules && npm install --production",
+    "cb": "rimraf .\\dist && tsc",
+    "pubprep": "npm run ci && npm run cb"
+  },
+  "author": "PraveenMathamsetty",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^14.10.1",
+    "@types/q": "^1.5.4",
+    "adm-zip": "^0.4.16",
+    "azure-pipelines-task-lib": "3.1.6",
+    "azure-pipelines-tasks-azure-arm-rest-v2": "2.0.4",
+    "typed-rest-client": "^1.8.4",
+    "uuid": "8.3.0",
+    "@types/chai": "^4.2.14",
+    "@types/chai-as-promised": "^7.1.3",
+    "@types/mocha": "^8.0.3",
+    "@types/mockery": "^1.4.29",
+    "@types/uuid": "^8.3.0",
+    "chai": "^4.2.0",
+    "mockery": "^2.1.0",
+    "chai-as-promised": "^7.1.1",
+    "node-stream-zip": "^1.11.3",
+    "nyc": "^15.1.0",
+    "sync-request": "^6.1.0",
+    "ts-mockito": "^2.6.1",
+    "@types/js-yaml": "^4.0.0",
+    "@azure/ms-rest-nodeauth": "^3.0.10"
+  },
+  "devDependencies": {
+  }
+}

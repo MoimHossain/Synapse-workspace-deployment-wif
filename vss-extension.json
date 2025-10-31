@@ -1,35 +1,60 @@
 {
   "manifestVersion": 1,
-  "id": "synapse-workspace-deployment-wif",
+  "id": "mh-synapse-workspace-deployment",
   "name": "Synapse Workspace Deployment with WIF",
-  "version": "0.0.1",
+  "description": "Azure Pipeline task for deploying Synapse Workspace using Workload Identity Federation",
+  "version": "0.0.0",
   "publisher": "MoimHossain",
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
-  "description": "Azure Pipeline task for deploying Synapse Workspace using Workload Identity Federation",
+  "scopes": [
+    "vso.variablegroups_read",
+    "vso.code",
+    "vso.build",
+    "vso.release",
+    "vso.serviceendpoint_query"
+  ],
   "categories": [
     "Azure Pipelines"
   ],
   "icons": {
-    "default": "images/extension-icon.png"
+    "default": "images/icon.png"
   },
   "files": [
     {
-      "path": "HelloWorldTask"
+      "path": "synapse-deploy"
+    },
+    {
+      "path": "toggle-trigger"
+    },
+    {
+      "path": "images",
+      "addressable": true
     }
   ],
   "contributions": [
     {
-      "id": "hello-world-task",
+      "id": "mh-synapse-deploy",
+      "type": "ms.vss-distributed-task.task",
+      "description": "Deployment task for synapse workspace.",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "synapse-deploy"
+      }
+    },
+    {
+      "id": "mh-toggle-trigger",
       "type": "ms.vss-distributed-task.task",
       "targets": [
         "ms.vss-distributed-task.tasks"
       ],
       "properties": {
-        "name": "HelloWorldTask"
+        "name": "toggle-trigger"
       }
     }
   ]
