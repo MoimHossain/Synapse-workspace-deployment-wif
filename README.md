@@ -10,7 +10,7 @@ This repository contains an Azure Pipeline task extension for deploying Synapse 
 ```
 .
 ├── vss-extension.json          # Extension manifest file
-└── HelloWorldTask/             # Hello World task folder
+└── synapse-deploy/             # Synapse deployment task folder
     ├── task.json               # Task definition
     ├── index.js                # Task implementation
     ├── package.json            # Node.js dependencies
@@ -21,7 +21,7 @@ This repository contains an Azure Pipeline task extension for deploying Synapse 
 
 1. **Install dependencies** for the task:
    ```bash
-   cd HelloWorldTask
+   cd synapse-deploy
    npm install
    ```
 
@@ -34,4 +34,4 @@ This repository contains an Azure Pipeline task extension for deploying Synapse 
 
 ### Task Details
 
-See the [HelloWorldTask README](HelloWorldTask/README.md) for specific task documentation.
+See the [synapse-deploy README](synapse-deploy/README.md) for specific task documentation.
